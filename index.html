@@ -84,11 +84,11 @@
     function loadUrl() {
       var url = document.getElementById('urlInput').value;
       var proxyFrame = document.getElementById('proxyFrame');
-      proxyFrame.src = 'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(url);
+      proxyFrame.src = 'https://cors-anywhere.herokuapp.com/' + encodeURIComponent(url);
     }
 
     window.addEventListener('message', function(event) {
-      if (event.origin !== 'https://api.codetabs.com' || event.data === '') return;
+      if (event.origin !== 'https://cors-anywhere.herokuapp.com' || event.data === '') return;
       document.getElementById('urlInput').value = event.data;
     });
   </script>
