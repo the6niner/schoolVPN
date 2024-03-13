@@ -50,12 +50,25 @@
         <iframe id="proxyFrame"></iframe>
     </div>
 
-    <script>
-        function loadUrl() {
-            var url = document.getElementById('urlInput').value;
-            var proxyFrame = document.getElementById('proxyFrame');
-            proxyFrame.src = 'https://cors-anywhere.herokuapp.com/' + encodeURIComponent(url);
-        }
-    </script>
+<script>
+    function loadUrl() {
+        var url = document.getElementById('urlInput').value;
+        var proxyFrame = document.getElementById('proxyFrame');
+        
+        var headers = new Headers();
+        headers.append('Origin', window.location.origin); // Add the Origin header
+        
+        fetch('https://cors-anywhere.herokuapp.com/' + encodeURIComponent(url), {
+            method: 'GET',
+            headers: headers
+        })
+        .then(response => response.text())
+        .then(data => {
+            proxyFrame.srcdoc = data; // Set iframe content directly
+        })
+        .catch(error => console.error('Error:', error));
+    }
+</script>
+
 </body>
 </html>
