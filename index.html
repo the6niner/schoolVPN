@@ -83,20 +83,12 @@
   <script>
     function loadUrl() {
       var url = document.getElementById('urlInput').value;
-      var yqlUrl = 'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from html where url="' + url + '"') + '&format=xml&callback=callbackFunction';
       var proxyFrame = document.getElementById('proxyFrame');
-      proxyFrame.src = yqlUrl;
-    }
-
-    function callbackFunction(data) {
-      var content = data.results[0];
-      document.getElementById('proxyFrame').contentWindow.document.open();
-      document.getElementById('proxyFrame').contentWindow.document.write(content);
-      document.getElementById('proxyFrame').contentWindow.document.close();
+      proxyFrame.src = 'https://cors-anywhere.herokuapp.com/' + encodeURIComponent(url);
     }
 
     window.addEventListener('message', function(event) {
-      if (event.origin !== 'https://query.yahooapis.com' || event.data === '') return;
+      if (event.origin !== 'https://cors-anywhere.herokuapp.com' || event.data === '') return;
       document.getElementById('urlInput').value = event.data;
     });
   </script>
