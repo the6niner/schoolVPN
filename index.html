@@ -76,7 +76,7 @@
       </div>
     </div>
     <div class="content">
-      <iframe id="proxyFrame" sandbox="allow-same-origin allow-scripts" onload="updateUrl(event)"></iframe>
+      <iframe id="proxyFrame" sandbox="allow-same-origin allow-scripts"></iframe>
     </div>
   </div>
 
@@ -87,12 +87,10 @@
       proxyFrame.src = 'https://api.allorigins.win/get?url=' + encodeURIComponent(url);
     }
 
-    function updateUrl(event) {
-      var iframeUrl = event.target.contentWindow.location.href;
-      if (iframeUrl && iframeUrl !== 'about:blank') {
-        document.getElementById('urlInput').value = iframeUrl;
-      }
-    }
+    window.addEventListener('message', function(event) {
+      if (event.origin !== 'https://api.allorigins.win' || event.data === '') return;
+      document.getElementById('urlInput').value = event.data;
+    });
   </script>
 </body>
 </html>
