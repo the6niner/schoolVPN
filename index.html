@@ -56,13 +56,12 @@
         function loadUrl() {
             var url = document.getElementById('urlInput').value;
             var proxyFrame = document.getElementById('proxyFrame');
-            
-            fetch('https://api.allorigins.win/get?url=' + encodeURIComponent(url))
-            .then(response => response.json())
-            .then(data => {
-                proxyFrame.srcdoc = data.contents; // Set iframe content directly
-            })
-            .catch(error => console.error('Error:', error));
+
+            // Reset iframe source to prevent caching
+            proxyFrame.src = 'about:blank';
+
+            // Set iframe source to requested URL
+            proxyFrame.src = url;
         }
     </script>
 </body>
