@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>website unblocker</title>
+  <title>Website Unblocker</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -69,14 +69,14 @@
 <body>
   <div class="container">
     <div class="header">
-      <h1>website unblocker</h1>
+      <h1>Website Unblocker</h1>
       <div class="input-group">
         <input type="text" id="urlInput" placeholder="Enter URL">
-        <button onclick="loadUrl()">enter</button>
+        <button onclick="loadUrl()">Enter</button>
       </div>
     </div>
     <div class="content">
-      <iframe id="proxyFrame" sandbox="allow-same-origin allow-scripts"></iframe>
+      <iframe id="proxyFrame" sandbox="allow-same-origin allow-scripts" onload="updateUrl(event)"></iframe>
     </div>
   </div>
 
@@ -89,12 +89,10 @@
 
     function updateUrl(event) {
       var iframeUrl = event.target.contentWindow.location.href;
-      if (iframeUrl !== 'about:blank') {
+      if (iframeUrl && iframeUrl !== 'about:blank') {
         document.getElementById('urlInput').value = iframeUrl;
       }
     }
-
-    document.getElementById('proxyFrame').addEventListener('load', updateUrl);
   </script>
 </body>
 </html>
