@@ -7,13 +7,13 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
         }
         .container {
             display: flex;
             flex-direction: column;
-            height: 100vh;
+            height: 100vh; /* Make container fill the entire viewport height */
         }
         .input-group {
             display: flex;
@@ -36,10 +36,10 @@
             background-color: #0056b3;
         }
         iframe {
-            flex: 1;
+            flex: 1; /* Fill remaining space in container */
             border: none;
-            width: 100%;
-            height: calc(100vh - 48px); /* Adjusted height to account for input and button */
+            width: 100%; /* Make iframe fill container width */
+            height: 100%; /* Make iframe fill container height */
         }
     </style>
 </head>
@@ -56,11 +56,11 @@
         function loadUrl() {
             var url = document.getElementById('urlInput').value;
             var proxyFrame = document.getElementById('proxyFrame');
-
+            
             fetch('https://api.allorigins.win/get?url=' + encodeURIComponent(url))
             .then(response => response.json())
             .then(data => {
-                proxyFrame.srcdoc = data.contents;
+                proxyFrame.srcdoc = data.contents; // Set iframe content directly
             })
             .catch(error => console.error('Error:', error));
         }
